@@ -22,7 +22,7 @@ chmod +x runnord.sh
 or why not 
 
 ```
-curl -sS https://raw.githubusercontent.com/LinusOlofsson-maker/NordicLinux/main/runnord.sh | 
 
+sh <(curl -sSf https://raw.githubusercontent.com/LinusOlofsson-maker/NordicLinux/main/runnord.sh) 
 
 ```
