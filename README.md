@@ -6,9 +6,23 @@ I've also included the .sh file in .txt format. Again just to keep it easy for a
 
 ##To install:
 ````
-git clone https://github.com/LinusOlofsson-maker/NordicLinux.git \n
-cd /NordicLinux \n
-chmod +x runnord.sh \n
-./runnord.sh \n
+git clone https://github.com/LinusOlofsson-maker/NordicLinux.git 
+cd /NordicLinux \
+chmod +x runnord.sh \
+./runnord.sh 
 
 ````
+or 
+````
+wget "https://raw.githubusercontent.com/LinusOlofsson-maker/NordicLinux/main/runnord.sh"
+chmod +x runnord.sh
+./runnord.sh
+
+````
+or why not 
+
+```
+curl -sS https://raw.githubusercontent.com/LinusOlofsson-maker/NordicLinux/main/runnord.sh | 
+
+
+```
