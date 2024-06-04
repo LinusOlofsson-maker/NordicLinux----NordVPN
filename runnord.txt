@@ -4,14 +4,12 @@
 # or the actuall setup of nordvpn in Linux. The nickname feature is not included. 
 # Its to kind of keep it simple to new users, to avoid name mixups. 
 # 2024-06-03
-PS3="Have you installed NordVPN?"
 
+echo "Have you installed NordVPN?"
 options0=("Yes 1" "No 2")
-
 select op in "${options0[@]}"
   do
     case $op in
-
         "Yes 1")
             echo " Now would be a good time to make sure that you're logged in :) " 
             echo " Running command: nordvpn login "
@@ -38,15 +36,15 @@ select op in "${options0[@]}"
                         
                         echo -n "set to firewall 1 or 0: " 
                         read firewall
-                        nordvpn set Firewall $firewall
+                        nordvpn set firewall $firewall
                         
                         echo -n "set to fwmark 1 or 0: " 
                         read fwmark
-                        nordvpn set Firewall $fwmark
+                        nordvpn set fwmark $fwmark
 
                         echo -n "set to ipv6 1 or 0: " 
                         read ipv6
-                        nordvpn set Firewall $ipv6
+                        nordvpn set ipv6 $ipv6
 
                         echo -n "set to notify 1 or 0: "
                         read notify
@@ -88,35 +86,43 @@ select op in "${options0[@]}"
                         echo -e '\n'
                         nordvpn settings
                         echo -e "\n"
-                        ;;
+                     ;;
                     "Meshnet 2")
                         
-                        echo "Set the Meshnet settings"
-                        echo " First you need to set the hostmachines NordName or nickname"
-                        echo " Then set the configs to allow/deny"
-                        echo " peer list: " 
+                        echo "Now we we look at your Meshnet settings"
+                        echo " First you need to set the name  or nickname of the targetmachine that you wish to configure"
+                        echo " The statments will take either allow/deny or yes/no awnsers depending on the question."
+                        echo " Each statment will contain the apporopiate information"
+                        echo " You will now be prometed with a list showing the names and information about each peer in your network"
+                        read -sn 1 -p "Press any key to continue..."
+                        echo -e "***************************"
+                        echo -e "******** peer list ********" 
+                        echo -e "***************************"
+                        echo -e "\n"
                         nordvpn mesh peer list
-                        echo -n "NordName"
-                        read NordName
-                        echo -n "set incoming connections to"
+                        echo -e "Now please fill out the Name of your target machine: "
+                        read target
+                        echo -n "press Enter to contineue"
+                        read ans
+                        echo -n "set incoming connections to this current device allow/deny: "
                         read incoming
-                        nordvpn meshnet peer incoming $incoming $$NordName
-                        echo -n "set routing trought THIS device to"
+                        nordvpn meshnet peer incoming $incoming $target
+                        echo -n "set routing to be allowed through THIS DEVICE, i.e use this device as an endpoint alLow/deny: "
                         read routing
-                        nordvpn meshnet peer routing $routing $NordName 
-                        echo -n "set local visability on lan to"
+                        nordvpn meshnet peer routing $routing $target 
+                        echo -n "set local this device to be visability on local lan to allow/deny: "
                         read local
-                        nordvpn meshnet peer local $local $NordName 
-                        echo -n "set fileshareing to THIS device to"
+                        nordvpn meshnet peer local $local $target 
+                        echo -n "set fileshareing to be allowed or denyed to THIS DEVICE, allow/deny: "
                         read fileshareing
-                        nordvpn meshnet peer fileshare $fileshareing $NordName 
-                        echo -n "set auto-accept incoming files to THIS device to"
-                        read auto
-                        nordvpn meshnet peer auto-accept $auto $NordName 
+                        nordvpn meshnet peer fileshare $fileshareing $target 
+                        echo -n "shall AutoAccept incoming files be allowed or denyed on THIS DEVICE, allow/deny: "
+                        read $AutoAccept
+                        nordvpn meshnet peer auto-accept $AutoAccept $target 
 
-                        echo -n "connect this device TO your chosen peer:"
+                        echo -n "would you like to connect this device to your TARGETMACHINE and use it as an endpoint? allow/deny: "
                         read connect
-                        nordvpn meshnet peer connect $connect $NordName 
+                        nordvpn meshnet peer connect $target $connect 
 
                         echo -e "***************************"
                         echo -e "*** YOUR NORDVPN STATUS ***"
@@ -130,7 +136,7 @@ select op in "${options0[@]}"
                         echo -e '\n'
                         nordvpn settings
                         echo -e "\n"
-                        ;;
+                     ;;
                     "Status 3")
                         echo "This is your current status and settings:"
                         echo -e '\n'
@@ -157,7 +163,7 @@ select op in "${options0[@]}"
                         echo -e "*********************************"            
                         echo -e "\n"
                         nordvpn countries
-                        ;;
+                     ;;
                     "StartVPN 4")
                         nordvpn connect
                         echo -e "***************************"
@@ -165,7 +171,7 @@ select op in "${options0[@]}"
                         echo -e "***************************"
                         echo -e '\n'
                         nordvpn status
-                        ;;
+                    ;;
                     "StopVPN 5")
                         nordvpn disconnect
                         echo -e "***************************"
@@ -174,13 +180,13 @@ select op in "${options0[@]}"
                         echo -e '\n'
                         nordvpn status
                         nordvpn logout
-                        ;;
+                    ;;
                     "Quit 6")
-                        break
-                        ;;
+                        exit
+                    ;;
                     *) echo "invalid option $REPLY";;
                 esac
-                echo 'Rerun: Press enter or byebye time: Enter 6'
+                echo 'To re-run: Press enter for the menu or is it byebye time: write 6'
                 options=("Settings 1" "Meshnet 2" "Status 3" "StartVPN 4" "StopVPN 5" "Quit 6")
                 #echo "$options"
             done
@@ -199,6 +205,7 @@ select op in "${options0[@]}"
                         nordvpn login
                         echo -e " To connect run the command 'nordvpn connect' " once youre done logging in.
                         echo -e "#nordvpn connect "
+                        echo "To see full instaltaion guide, vistit: https://nordvpn.com/download/linux/ "
                     ;;
                     "Nah 2")
                         break
