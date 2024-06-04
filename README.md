@@ -21,8 +21,11 @@ chmod +x runnord.sh
 
 ````
 Or any other way you please. 
-![The Main VPN meny](https://github.com/LinusOlofsson-maker/NordicLinux/blob/650ad46bd4eb9882279c626be2cf6273fbe8e7f9/first.png)
-![Part of the status sub category](https://github.com/LinusOlofsson-maker/NordicLinux/blob/650ad46bd4eb9882279c626be2cf6273fbe8e7f9/status.png)
 
 # A brief view 
 I've included two pictures so that you can get a feel for what it's about. Note that the pictures are taken during generation 1 of the build; hence they might not be accurate to when you use this. But there shouldn't be any major changes, more so in functionalities and guidance.
+
+![The Main VPN meny](https://github.com/LinusOlofsson-maker/NordicLinux/blob/650ad46bd4eb9882279c626be2cf6273fbe8e7f9/first.png)
+![Part of the status sub category](https://github.com/LinusOlofsson-maker/NordicLinux/blob/650ad46bd4eb9882279c626be2cf6273fbe8e7f9/status.png)
+
+
